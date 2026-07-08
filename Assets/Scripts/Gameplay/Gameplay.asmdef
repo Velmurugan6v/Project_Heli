@@ -1,0 +1,17 @@
+{
+    "name": "Gameplay",
+    "rootNamespace": "Helicopter",
+    "references": [
+        "GUID:b5c07da71b174f046b9013b940a1233e",
+        "GUID:929f9d66f68cc4949b9e257fadfcc586"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

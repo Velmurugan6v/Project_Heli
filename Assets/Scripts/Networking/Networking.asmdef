@@ -1,0 +1,18 @@
+{
+    "name": "Networking",
+    "rootNamespace": "HelicopterTag",
+    "references": [
+        "GUID:b5c07da71b174f046b9013b940a1233e",
+        "GUID:5cf3f6de69bf12745af95cae3a7bf25e",
+        "GUID:929f9d66f68cc4949b9e257fadfcc586"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
