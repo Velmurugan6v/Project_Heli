@@ -1,7 +1,10 @@
 {
     "name": "Helicopter",
     "rootNamespace": "HelicopterTag",
-    "references": [],
+    "references": [
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:b5c07da71b174f046b9013b940a1233e"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

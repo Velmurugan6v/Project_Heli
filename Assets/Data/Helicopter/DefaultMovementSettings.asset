@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3110c544157a4139b055ef912e51cb1e, type: 3}
+  m_Name: DefaultMovementSettings
+  m_EditorClassIdentifier: 
+  moveForce: 10
+  liftForce: 30
+  turnSpeed: 180
+  forwardDamping: 20
+  maxForwardSpeed: 10
+  maxLiftSpeed: 13
+  maxTurnSpeed: 90
+  turnAcceleration: 240
+  maxHeight: 5
+  hoverAssistEnabled: 0
+  hoverStrength: 8
+  hoverForce: 5.17
+  hoverDeadZone: 2.46
+  linearDamping: 1.5
+  angularDamping: 2
