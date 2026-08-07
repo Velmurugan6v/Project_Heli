@@ -1,9 +1,10 @@
 {
     "name": "Gameplay",
-    "rootNamespace": "Helicopter",
+    "rootNamespace": "HelicopterTag",
     "references": [
         "GUID:b5c07da71b174f046b9013b940a1233e",
-        "GUID:929f9d66f68cc4949b9e257fadfcc586"
+        "GUID:929f9d66f68cc4949b9e257fadfcc586",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

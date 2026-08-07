@@ -1,9 +1,8 @@
 using UnityEngine;
 
-namespace Helicopter
+namespace HelicopterTag.Helicopter
 {
     public class HelicopterAudio : MonoBehaviour
     {
-        
     }
 }
