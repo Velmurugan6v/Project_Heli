@@ -3,6 +3,8 @@ using HelicopterTag.Core;
 using HelicopterTag.Core.Events;
 using HelicopterTag.Gameplay.Config;
 using HelicopterTag.Gameplay.Events;
+using HelicopterTag.Gameplay.Match;
+using HelicopterTag.Gameplay.Match.Events;
 using HelicopterTag.Gameplay.Scoring.Strategies;
 using UnityEngine;
 
@@ -59,6 +61,11 @@ namespace HelicopterTag.Gameplay.Scoring
         private void OnMatchFinished(MatchFinishedEvent eventData)
         {
             _isScoringActive = false;
+
+            MatchResult result = _scoreStrategy.GetMatchResult(_tagManager.GetPLayers());
+            EventBus.Publish(new MatchResultReadyEvent(result));
+
+            GameLogger.Log("MatchResultReadyEvent Published");
         }
 
         private void CreateStrategy()

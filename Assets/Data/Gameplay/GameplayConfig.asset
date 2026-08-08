@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GameplayConfig
   m_EditorClassIdentifier: 
   <CountDownDuration>k__BackingField: 5
-  <MatchDuration>k__BackingField: 63
+  <MatchDuration>k__BackingField: 15
   <TagProtectionDuration>k__BackingField: 3
   <ScoringMode>k__BackingField: 0

@@ -4,6 +4,7 @@ using HelicopterTag.Core;
 using HelicopterTag.Core.Events;
 using HelicopterTag.Gameplay.Config;
 using HelicopterTag.Gameplay.Events;
+using HelicopterTag.Gameplay.Player;
 using HelicopterTag.Gameplay.Tag;
 using HelicopterTag.Gameplay.Tag.Events;
 using UnityEngine;
@@ -117,6 +118,19 @@ namespace HelicopterTag
             _protectedParticipant = null;
 
             EventBus.Publish(new TagProtectionChangedEvent(participant, false));
+        }
+
+        //Temp
+        public IReadOnlyList<PlayerContext> GetPLayers()
+        {
+            List<PlayerContext> players = new();
+
+            foreach (TagParticipant participant in _participants)
+            {
+                players.Add(participant.PlayerContext);
+            }
+
+            return players;
         }
     }
 }
