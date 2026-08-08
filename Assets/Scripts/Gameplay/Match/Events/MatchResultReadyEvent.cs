@@ -1,5 +1,3 @@
-using HelicopterTag.Gameplay.Player;
-
 namespace HelicopterTag.Gameplay.Match.Events
 {
     public readonly struct MatchResultReadyEvent

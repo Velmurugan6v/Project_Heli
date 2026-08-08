@@ -9,13 +9,6 @@ namespace HelicopterTag.Gameplay.Scoring.Strategies
 {
     public class SurvivalTimeStrategy : IScoreStrategy, ITickable
     {
-        private readonly IReadOnlyList<TagParticipant> _participants;
-
-
-        public SurvivalTimeStrategy(IReadOnlyList<TagParticipant> participants)
-        {
-            _participants = participants;
-        }
 
         public void Initialize()
         { 
@@ -44,13 +37,13 @@ namespace HelicopterTag.Gameplay.Scoring.Strategies
             
         }
 
-        public void Tick(float deltaTime)
+        public void Tick(float deltaTime, IReadOnlyList<PlayerContext> players)
         {
-            foreach (TagParticipant participant in _participants)
+            foreach (PlayerContext player in players)
             {
-                if (participant.IsIt) continue;
+                if (player.MatchData.IsIt) continue;
 
-                participant.PlayerContext.MatchData.AddSurvivalTime(deltaTime);
+                player.MatchData.AddSurvivalTime(deltaTime);
             }
         }
     }

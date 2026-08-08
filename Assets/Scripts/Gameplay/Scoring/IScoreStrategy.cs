@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using HelicopterTag.Gameplay.Match;
 using HelicopterTag.Gameplay.Player;
-using UnityEngine;
 
 namespace HelicopterTag.Gameplay.Scoring
 {

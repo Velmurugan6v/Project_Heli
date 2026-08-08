@@ -1,16 +1,13 @@
-using System;
 using System.Collections.Generic;
-using HelicopterTag.Core.Events;
 using HelicopterTag.Gameplay.Player;
-using HelicopterTag.Gameplay.Player.Event;
-using TMPro;
+using HelicopterTag.Gameplay.Tag;
 using UnityEngine;
 
 namespace HelicopterTag.UI.Gameplay
 {
     public class ScoreboardView : MonoBehaviour
     {
-        [SerializeField] private TagManager tagManager;
+        [SerializeField] private PlayerManager _playerManager;
         [SerializeField] private Transform _content;
         [SerializeField] private ScoreEntryView _scoreEntryPrefab;
 
@@ -19,7 +16,7 @@ namespace HelicopterTag.UI.Gameplay
 
         private void Start()
         {
-            Initialize(tagManager.GetPLayers());
+            Initialize(_playerManager.Players);
         }
 
         public void Initialize(IReadOnlyList<PlayerContext> players)

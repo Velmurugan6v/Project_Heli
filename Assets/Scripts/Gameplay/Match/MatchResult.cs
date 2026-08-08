@@ -1,5 +1,4 @@
 using HelicopterTag.Gameplay.Player;
-using UnityEngine;
 
 namespace HelicopterTag.Gameplay.Match
 {

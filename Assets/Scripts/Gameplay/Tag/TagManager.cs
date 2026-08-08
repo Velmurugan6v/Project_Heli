@@ -1,15 +1,13 @@
-using System;
 using System.Collections.Generic;
 using HelicopterTag.Core;
 using HelicopterTag.Core.Events;
 using HelicopterTag.Gameplay.Config;
 using HelicopterTag.Gameplay.Events;
 using HelicopterTag.Gameplay.Player;
-using HelicopterTag.Gameplay.Tag;
 using HelicopterTag.Gameplay.Tag.Events;
 using UnityEngine;
 
-namespace HelicopterTag
+namespace HelicopterTag.Gameplay.Tag
 {
     public class TagManager : MonoBehaviour
     {
