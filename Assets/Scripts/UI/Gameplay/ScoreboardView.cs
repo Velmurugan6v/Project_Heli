@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using HelicopterTag.Gameplay.Player;
-using HelicopterTag.Gameplay.Tag;
 using UnityEngine;
 
 namespace HelicopterTag.UI.Gameplay

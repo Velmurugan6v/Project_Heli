@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using HelicopterTag.Core;
 using HelicopterTag.Gameplay.Match;
 using HelicopterTag.Gameplay.Player;
@@ -9,9 +10,8 @@ namespace HelicopterTag.Gameplay.Scoring.Strategies
 {
     public class SurvivalTimeStrategy : IScoreStrategy, ITickable
     {
-
         public void Initialize()
-        { 
+        {
             GameLogger.Log("Survival time strategy initialized");
         }
 
@@ -21,20 +21,21 @@ namespace HelicopterTag.Gameplay.Scoring.Strategies
 
         public MatchResult GetMatchResult(IReadOnlyList<PlayerContext> players)
         {
-            PlayerContext winner = null;
-            float highestTime=float.MinValue;
+            var sortedPlayers = players.
+                OrderByDescending(players => players.MatchData.SurvivalTime).ToList();
 
-            foreach (PlayerContext player in players)
+            List<PlayerResult> results = new();
+
+            for (int i = 0; i < sortedPlayers.Count; i++)
             {
-                if (player.MatchData.SurvivalTime > highestTime)
-                {
-                    winner = player;
-                    highestTime = player.MatchData.SurvivalTime;
-                }
+                PlayerContext player = sortedPlayers[i];
+                PlayerResult result =
+                    new PlayerResult(player, ResultType.SurvivalTime, player.MatchData.SurvivalTime, i + 1);
+                
+                results.Add(result);
             }
-            
-            return new MatchResult(winner, Mathf.RoundToInt(highestTime));
-            
+
+            return new MatchResult(results);
         }
 
         public void Tick(float deltaTime, IReadOnlyList<PlayerContext> players)

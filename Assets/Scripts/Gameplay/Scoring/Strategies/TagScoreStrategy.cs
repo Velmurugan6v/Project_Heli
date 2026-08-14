@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using HelicopterTag.Core;
 using HelicopterTag.Core.Events;
 using HelicopterTag.Gameplay.Match;
@@ -22,19 +23,20 @@ namespace HelicopterTag.Gameplay.Scoring.Strategies
 
         public MatchResult GetMatchResult(IReadOnlyList<PlayerContext> players)
         {
-            PlayerContext winner = null;
-            int highestScore = int.MinValue;
+            var sortedPlayers = players.
+                OrderByDescending(players => players.MatchData.TagScore).ToList();
 
-            foreach (PlayerContext player in players)
+            List<PlayerResult> results = new();
+
+            for (int i = 0; i < sortedPlayers.Count; i++)
             {
-                if (player.MatchData.TagScore > highestScore)
-                {
-                    highestScore = player.MatchData.TagScore;
-                    winner = player;
-                }
+                PlayerContext player = sortedPlayers[i];
+                PlayerResult result=new PlayerResult(player, ResultType.TagScore, player.MatchData.TagScore,i+1);
+                
+                results.Add(result);
             }
-            
-            return new MatchResult(winner, highestScore);
+
+            return new MatchResult(results);
         }
 
         private void OnItChanged(ItChangedEvent eventData)

@@ -23,12 +23,14 @@ namespace HelicopterTag.Gameplay.Scoring
         {
             EventBus.Subscribe<MatchStartedEvent>(OnMatchStarted);
             EventBus.Subscribe<MatchFinishedEvent>(OnMatchFinished);
+            EventBus.Subscribe<MatchResetEvent>(OnMatchReset);
         }
 
         private void OnDisable()
         {
             EventBus.Unsubscribe<MatchStartedEvent>(OnMatchStarted);
             EventBus.Unsubscribe<MatchFinishedEvent>(OnMatchFinished);
+            EventBus.Unsubscribe<MatchResetEvent>(OnMatchReset);
         }
 
 
@@ -42,6 +44,11 @@ namespace HelicopterTag.Gameplay.Scoring
         private void OnDestroy()
         {
             _scoreStrategy.Dispose();
+        }
+
+        private void OnMatchReset(MatchResetEvent eventData)
+        {
+            ResetScore();
         }
 
         private void Update()
@@ -80,6 +87,14 @@ namespace HelicopterTag.Gameplay.Scoring
                     _scoreStrategy = new SurvivalTimeStrategy();
                     break;
             }
+        }
+
+        private void ResetScore()
+        {
+            _isScoringActive = false;
+            _scoreStrategy?.Dispose();
+            CreateStrategy();
+            _scoreStrategy?.Initialize();
         }
     }
 }

@@ -12,6 +12,12 @@ namespace HelicopterTag.Gameplay.Player
         private void Awake()
         {
             MatchData = new PlayerMatchData(this);
+            SetDisplayName();
+        }
+
+        private void SetDisplayName()
+        {
+            _displayName = gameObject.name;
         }
     }
 }

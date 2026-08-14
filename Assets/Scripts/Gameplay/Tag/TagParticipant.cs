@@ -13,7 +13,7 @@ namespace HelicopterTag.Gameplay.Tag
         public bool IsIt { get; private set; }
 
 
-        private void Awake()
+        private void Start()
         {
             _playerManager = FindFirstObjectByType<PlayerManager>();
             _playerManager.RegisterPlayer(_playerContext);
@@ -30,12 +30,14 @@ namespace HelicopterTag.Gameplay.Tag
         public void SetAsIt()
         {
             IsIt = true;
+            _playerContext.MatchData.SetIt(true);
             GameLogger.Log($"Tag Participant {gameObject.name} is set to {IsIt}");
         }
 
         public void RemoveIt()
         {
             IsIt = false;
+            _playerContext.MatchData.SetIt(false);
             GameLogger.Log($"Tag Participant {gameObject.name} is set to {IsIt}");
         }
     }

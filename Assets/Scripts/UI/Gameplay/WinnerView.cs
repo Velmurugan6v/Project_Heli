@@ -1,6 +1,7 @@
 using System;
 using HelicopterTag.Core;
 using HelicopterTag.Core.Events;
+using HelicopterTag.Gameplay.Match;
 using HelicopterTag.Gameplay.Match.Events;
 using TMPro;
 using UnityEngine;
@@ -13,6 +14,12 @@ namespace HelicopterTag.UI.Gameplay
         [SerializeField] private TMP_Text _winnerNameText;
         [SerializeField] private TMP_Text _winnerScoreText;
 
+        private MatchResultFormatter _formatter;
+
+        private void Awake()
+        {
+            _formatter = new MatchResultFormatter();
+        }
 
         private void OnEnable()
         {
@@ -26,10 +33,12 @@ namespace HelicopterTag.UI.Gameplay
 
         private void OnMatchResultReady(MatchResultReadyEvent eventData)
         {
+            PlayerResult winner = eventData.Result.Winner;
+
             _panel.SetActive(true);
-            GameLogger.Log("Match Result Ready");
-            _winnerNameText.text = eventData.Result.Winner.name;
-            _winnerScoreText.text = $"{eventData.Result.WinningScore}";
+
+            _winnerNameText.text = winner.Player.name;
+            _winnerScoreText.text = _formatter.Format(winner);
         }
     }
 }

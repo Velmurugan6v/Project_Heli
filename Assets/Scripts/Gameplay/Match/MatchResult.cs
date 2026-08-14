@@ -1,16 +1,17 @@
+using System.Collections.Generic;
 using HelicopterTag.Gameplay.Player;
 
 namespace HelicopterTag.Gameplay.Match
 {
     public class MatchResult
     {
-        public PlayerContext Winner { get; }
-        public int WinningScore { get; }
+        public IReadOnlyList<PlayerResult> Results { get; }
+        public PlayerResult Winner => Results.Count > 0 ? Results[0] : null;
+        
 
-        public MatchResult(PlayerContext winner, int winningScore)
+        public MatchResult(IReadOnlyList<PlayerResult> results)
         {
-            Winner = winner;
-            WinningScore = winningScore;
+            Results = results;
         }
     }
 }

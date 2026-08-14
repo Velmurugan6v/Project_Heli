@@ -30,12 +30,14 @@ namespace HelicopterTag.Gameplay.Tag
         {
             EventBus.Subscribe<MatchStartedEvent>(OnMatchStarted);
             EventBus.Subscribe<MatchFinishedEvent>(OnMatchFinished);
+            EventBus.Subscribe<MatchResetEvent>(OnMatchReset);
         }
 
         private void OnDisable()
         {
             EventBus.Unsubscribe<MatchStartedEvent>(OnMatchStarted);
             EventBus.Unsubscribe<MatchFinishedEvent>(OnMatchFinished);
+            EventBus.Unsubscribe<MatchResetEvent>(OnMatchReset);
         }
 
 
@@ -50,6 +52,11 @@ namespace HelicopterTag.Gameplay.Tag
             _isTaggingActive = false;
             _protectedParticipant = null;
             _protectionTimeRemaining = 0f;
+        }
+
+        private void OnMatchReset(MatchResetEvent eventData)
+        {
+            ResetTagState();
         }
 
         private void Update()
@@ -88,6 +95,13 @@ namespace HelicopterTag.Gameplay.Tag
             _currentIt = newIt;
             _currentIt.SetAsIt();
 
+            if (previousIt != null)
+            {
+                EventBus.Publish(new PlayerTaggedEvent
+                    (previousIt.PlayerContext, newIt.PlayerContext));
+            }
+
+
             _protectedParticipant = previousIt;
             _protectionTimeRemaining = _config.TagProtectionDuration;
 
@@ -118,17 +132,12 @@ namespace HelicopterTag.Gameplay.Tag
             EventBus.Publish(new TagProtectionChangedEvent(participant, false));
         }
 
-        //Temp
-        public IReadOnlyList<PlayerContext> GetPLayers()
+        private void ResetTagState()
         {
-            List<PlayerContext> players = new();
-
-            foreach (TagParticipant participant in _participants)
-            {
-                players.Add(participant.PlayerContext);
-            }
-
-            return players;
+            _currentIt = null;
+            _protectedParticipant = null;
+            _isTaggingActive = false;
+            _protectionTimeRemaining = 0f;
         }
     }
 }
