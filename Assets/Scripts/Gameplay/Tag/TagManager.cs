@@ -1,14 +1,13 @@
-using System;
 using System.Collections.Generic;
 using HelicopterTag.Core;
 using HelicopterTag.Core.Events;
 using HelicopterTag.Gameplay.Config;
 using HelicopterTag.Gameplay.Events;
-using HelicopterTag.Gameplay.Tag;
+using HelicopterTag.Gameplay.Player;
 using HelicopterTag.Gameplay.Tag.Events;
 using UnityEngine;
 
-namespace HelicopterTag
+namespace HelicopterTag.Gameplay.Tag
 {
     public class TagManager : MonoBehaviour
     {
@@ -31,12 +30,14 @@ namespace HelicopterTag
         {
             EventBus.Subscribe<MatchStartedEvent>(OnMatchStarted);
             EventBus.Subscribe<MatchFinishedEvent>(OnMatchFinished);
+            EventBus.Subscribe<MatchResetEvent>(OnMatchReset);
         }
 
         private void OnDisable()
         {
             EventBus.Unsubscribe<MatchStartedEvent>(OnMatchStarted);
             EventBus.Unsubscribe<MatchFinishedEvent>(OnMatchFinished);
+            EventBus.Unsubscribe<MatchResetEvent>(OnMatchReset);
         }
 
 
@@ -51,6 +52,11 @@ namespace HelicopterTag
             _isTaggingActive = false;
             _protectedParticipant = null;
             _protectionTimeRemaining = 0f;
+        }
+
+        private void OnMatchReset(MatchResetEvent eventData)
+        {
+            ResetTagState();
         }
 
         private void Update()
@@ -89,6 +95,13 @@ namespace HelicopterTag
             _currentIt = newIt;
             _currentIt.SetAsIt();
 
+            if (previousIt != null)
+            {
+                EventBus.Publish(new PlayerTaggedEvent
+                    (previousIt.PlayerContext, newIt.PlayerContext));
+            }
+
+
             _protectedParticipant = previousIt;
             _protectionTimeRemaining = _config.TagProtectionDuration;
 
@@ -117,6 +130,14 @@ namespace HelicopterTag
             _protectedParticipant = null;
 
             EventBus.Publish(new TagProtectionChangedEvent(participant, false));
+        }
+
+        private void ResetTagState()
+        {
+            _currentIt = null;
+            _protectedParticipant = null;
+            _isTaggingActive = false;
+            _protectionTimeRemaining = 0f;
         }
     }
 }

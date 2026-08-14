@@ -1,8 +1,10 @@
-using System;
 using HelicopterTag.Core;
 using HelicopterTag.Core.Events;
 using HelicopterTag.Gameplay.Config;
 using HelicopterTag.Gameplay.Events;
+using HelicopterTag.Gameplay.Match;
+using HelicopterTag.Gameplay.Match.Events;
+using HelicopterTag.Gameplay.Player;
 using HelicopterTag.Gameplay.Scoring.Strategies;
 using UnityEngine;
 
@@ -10,7 +12,7 @@ namespace HelicopterTag.Gameplay.Scoring
 {
     public class ScoreManager : MonoBehaviour
     {
-        [SerializeField] private TagManager _tagManager;
+        [SerializeField] private PlayerManager _playerManager;
         [SerializeField] private GameplayConfig config;
         private IScoreStrategy _scoreStrategy;
 
@@ -21,12 +23,14 @@ namespace HelicopterTag.Gameplay.Scoring
         {
             EventBus.Subscribe<MatchStartedEvent>(OnMatchStarted);
             EventBus.Subscribe<MatchFinishedEvent>(OnMatchFinished);
+            EventBus.Subscribe<MatchResetEvent>(OnMatchReset);
         }
 
         private void OnDisable()
         {
             EventBus.Unsubscribe<MatchStartedEvent>(OnMatchStarted);
             EventBus.Unsubscribe<MatchFinishedEvent>(OnMatchFinished);
+            EventBus.Unsubscribe<MatchResetEvent>(OnMatchReset);
         }
 
 
@@ -42,13 +46,18 @@ namespace HelicopterTag.Gameplay.Scoring
             _scoreStrategy.Dispose();
         }
 
+        private void OnMatchReset(MatchResetEvent eventData)
+        {
+            ResetScore();
+        }
+
         private void Update()
         {
             if (!_isScoringActive)
                 return;
 
             if (_scoreStrategy is ITickable tickable)
-                tickable.Tick(Time.deltaTime);
+                tickable.Tick(Time.deltaTime, _playerManager.Players);
         }
 
         private void OnMatchStarted(MatchStartedEvent eventData)
@@ -59,6 +68,11 @@ namespace HelicopterTag.Gameplay.Scoring
         private void OnMatchFinished(MatchFinishedEvent eventData)
         {
             _isScoringActive = false;
+
+            MatchResult result = _scoreStrategy.GetMatchResult(_playerManager.Players);
+            EventBus.Publish(new MatchResultReadyEvent(result));
+
+            GameLogger.Log("MatchResultReadyEvent Published");
         }
 
         private void CreateStrategy()
@@ -70,9 +84,17 @@ namespace HelicopterTag.Gameplay.Scoring
                     break;
 
                 case ScoringMode.SurvivalScore:
-                    _scoreStrategy = new SurvivalTimeStrategy(_tagManager.Participants);
+                    _scoreStrategy = new SurvivalTimeStrategy();
                     break;
             }
+        }
+
+        private void ResetScore()
+        {
+            _isScoringActive = false;
+            _scoreStrategy?.Dispose();
+            CreateStrategy();
+            _scoreStrategy?.Initialize();
         }
     }
 }

@@ -1,4 +1,6 @@
-using UnityEngine;
+using System.Collections.Generic;
+using HelicopterTag.Gameplay.Match;
+using HelicopterTag.Gameplay.Player;
 
 namespace HelicopterTag.Gameplay.Scoring
 {
@@ -6,5 +8,7 @@ namespace HelicopterTag.Gameplay.Scoring
     {
         void Initialize();
         void Dispose();
+
+        MatchResult GetMatchResult(IReadOnlyList<PlayerContext> players);
     }
 }

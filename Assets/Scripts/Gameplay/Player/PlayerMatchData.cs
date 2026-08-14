@@ -6,13 +6,18 @@ namespace HelicopterTag.Gameplay.Player
     public class PlayerMatchData
     {
         private PlayerContext _owner;
-
+        public bool IsIt { get; private set; }
         public int TagScore { get; private set; }
         public float SurvivalTime { get; private set; }
 
         public PlayerMatchData(PlayerContext owner)
         {
             _owner = owner;
+        }
+
+        public void SetIt(bool value)
+        {
+            IsIt = value;
         }
 
         public void AddTagScore(int amount)

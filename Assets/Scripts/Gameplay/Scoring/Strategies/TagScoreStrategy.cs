@@ -1,5 +1,8 @@
+using System.Collections.Generic;
+using System.Linq;
 using HelicopterTag.Core;
 using HelicopterTag.Core.Events;
+using HelicopterTag.Gameplay.Match;
 using HelicopterTag.Gameplay.Player;
 using HelicopterTag.Gameplay.Tag.Events;
 
@@ -16,6 +19,24 @@ namespace HelicopterTag.Gameplay.Scoring.Strategies
         public void Dispose()
         {
             EventBus.Unsubscribe<ItChangedEvent>(OnItChanged);
+        }
+
+        public MatchResult GetMatchResult(IReadOnlyList<PlayerContext> players)
+        {
+            var sortedPlayers = players.
+                OrderByDescending(players => players.MatchData.TagScore).ToList();
+
+            List<PlayerResult> results = new();
+
+            for (int i = 0; i < sortedPlayers.Count; i++)
+            {
+                PlayerContext player = sortedPlayers[i];
+                PlayerResult result=new PlayerResult(player, ResultType.TagScore, player.MatchData.TagScore,i+1);
+                
+                results.Add(result);
+            }
+
+            return new MatchResult(results);
         }
 
         private void OnItChanged(ItChangedEvent eventData)
