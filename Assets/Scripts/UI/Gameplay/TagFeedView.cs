@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using HelicopterTag.Core.Events;
 using HelicopterTag.Gameplay.Player;
 using HelicopterTag.Gameplay.Tag.Events;
-using UnityEditor.Search;
 using UnityEngine;
 
 namespace HelicopterTag.UI.Gameplay
