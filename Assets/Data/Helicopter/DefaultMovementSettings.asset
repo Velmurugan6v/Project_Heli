@@ -25,5 +25,11 @@ MonoBehaviour:
   hoverStrength: 8
   hoverForce: 5.17
   hoverDeadZone: 2.46
+  _hoverHeight: 1.5
+  _verticalDamping: 3
+  _hoverDamping: 5
+  _hoverAmount: 0.05
+  _hoverSpeed: 2
   linearDamping: 1.5
   angularDamping: 2
+  _turnVelocityAlignment: 3

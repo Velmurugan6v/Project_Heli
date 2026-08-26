@@ -6,5 +6,6 @@ namespace HelicopterTag.Networking.Fusion
     public struct NetworkInputData : INetworkInput
     {
         public Vector2 Move;
+        public float Lift;
     }
 }

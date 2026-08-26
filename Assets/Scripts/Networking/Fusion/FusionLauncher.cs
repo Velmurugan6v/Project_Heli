@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace HelicopterTag.Networking.Fusion
 {
-    public class FusionLauncher : MonoBehaviour,INetworkRunnerCallbacks
+    public class FusionLauncher : MonoBehaviour, INetworkRunnerCallbacks
     {
         [SerializeField] private GameMode _gameMode;
         private NetworkRunner _runner;
@@ -17,7 +17,7 @@ namespace HelicopterTag.Networking.Fusion
             GameLogger.Log($"[Fusion] Starting NetworkRunner as {_gameMode}");
 
             _runner = gameObject.AddComponent<NetworkRunner>();
-            
+
             _runner.AddCallbacks(this);
 
             var result = await _runner.StartGame(
@@ -35,105 +35,92 @@ namespace HelicopterTag.Networking.Fusion
             }
             else
             {
-                    GameLogger.Log($"[Fusion] Failed to start {result.ShutdownReason}.");
+                GameLogger.Log($"[Fusion] Failed to start {result.ShutdownReason}.");
             }
         }
 
         public void OnInput(NetworkRunner runner, NetworkInput input)
         {
-            NetworkInputData data = new NetworkInputData
-            {
-                Move = new Vector2(
-                    Input.GetAxisRaw("Horizontal"),
-                    Input.GetAxisRaw("Vertical"))
-            };
+            NetworkInputData data = new NetworkInputData();
+
+            data.Move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+            if (Input.GetKey(KeyCode.Space))
+                data.Lift = 1;
+            else if (Input.GetKey(KeyCode.LeftControl))
+                data.Lift = -1;
 
             input.Set(data);
         }
 
         public void OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player)
         {
-            
         }
 
         public void OnObjectEnterAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player)
         {
-            
         }
 
         public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
         {
-            
         }
 
         public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
         {
-            
         }
 
         public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)
         {
-            
         }
 
         public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason)
         {
-            
         }
 
-        public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token)
+        public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request,
+            byte[] token)
         {
-            
         }
 
         public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason)
         {
-            
         }
 
-        public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ReliableKey key, ReadOnlySpan<byte> data)
+        public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ReliableKey key,
+            ReadOnlySpan<byte> data)
         {
-            
         }
 
         public void OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress)
         {
-            
         }
 
         public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input)
         {
-            
         }
 
         public void OnConnectedToServer(NetworkRunner runner)
         {
-            
         }
 
         public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
         {
-            
         }
 
         public void OnCustomAuthenticationResponse(NetworkRunner runner, Dictionary<string, object> data)
         {
-            
         }
 
         public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken)
         {
-            
         }
 
         public void OnSceneLoadDone(NetworkRunner runner)
         {
-            
         }
 
         public void OnSceneLoadStart(NetworkRunner runner)
         {
-            
         }
     }
 }

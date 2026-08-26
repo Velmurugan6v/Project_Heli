@@ -1,9 +1,9 @@
 using System.Collections.Generic;
+using Fusion;
 using HelicopterTag.Core;
 using HelicopterTag.Core.Events;
 using HelicopterTag.Gameplay.Config;
 using HelicopterTag.Gameplay.Events;
-using HelicopterTag.Gameplay.Player;
 using HelicopterTag.Gameplay.Tag.Events;
 using UnityEngine;
 
@@ -15,6 +15,7 @@ namespace HelicopterTag.Gameplay.Tag
         public IReadOnlyList<TagParticipant> Participants => _participants;
 
         private TagParticipant _currentIt;
+        
 
         public TagParticipant CurrentIt => _currentIt;
 
@@ -23,6 +24,8 @@ namespace HelicopterTag.Gameplay.Tag
         private float _protectionTimeRemaining;
 
         [SerializeField] private GameplayConfig _config;
+
+        [SerializeField] private NetworkRunner _runner;
 
         private bool _isTaggingActive;
 
@@ -44,6 +47,16 @@ namespace HelicopterTag.Gameplay.Tag
         private void OnMatchStarted(MatchStartedEvent eventData)
         {
             _isTaggingActive = true;
+
+            if (_runner == null)
+            {
+                Debug.LogError("[TagManager] NetworkRunner is missing!!");
+                return;
+            }
+
+            if (!_runner.IsServer)
+                return;
+
             SelectInitialIt();
         }
 
@@ -67,10 +80,10 @@ namespace HelicopterTag.Gameplay.Tag
         private void SelectInitialIt()
         {
             int participantCount = _participants.Count;
-            int randomIndex = UnityEngine.Random.Range(0, participantCount);
+            int randomIndex = Random.Range(0, participantCount);
             _currentIt = _participants[randomIndex];
             _currentIt.SetAsIt();
-
+            
             EventBus.Publish(new ItChangedEvent(null, _currentIt));
         }
 

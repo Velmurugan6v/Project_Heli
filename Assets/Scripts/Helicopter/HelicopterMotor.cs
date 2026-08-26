@@ -19,6 +19,7 @@ namespace HelicopterTag.Helicopter
         public float CurrentTurnSpeed => _currentTurnSpeed;
         public float CurrentForwardSpeed => Vector3.Dot(_rigidbody.linearVelocity, transform.forward);
         public HelicopterMovementSettings MovementSettings => _movementSettings;
+        public bool IsLifting => _inputData.Lift != 0;
 
 
         private void Awake()
@@ -28,8 +29,6 @@ namespace HelicopterTag.Helicopter
 
             Debug.Assert(_movementSettings != null,
                 $"{gameObject.name} : {nameof(_movementSettings)} is not assigned!!");
-
-            _targetHoverHeight = _transform.position.y;
         }
 
         public void SetInput(InputData inputData)
@@ -37,16 +36,20 @@ namespace HelicopterTag.Helicopter
             _inputData = inputData;
         }
 
-        private void FixedUpdate()
+        public void FixedUpdate()
         {
             UpdateForwardMovement();
             ApplyForwardDamping();
+
             UpdateLift();
             UpdateRotation();
+            
+            //StopForwardMovementWhenTurning();
+            AlignForwardVelocity();
+
             AltituteLimit();
             LimitForwardSpeed();
             LimitLiftSpeed();
-            //AltitudeLimit();
         }
 
 
@@ -61,15 +64,23 @@ namespace HelicopterTag.Helicopter
 
         private void ApplyForwardDamping()
         {
-            if (_inputData.Move.y != 0) return;
-
-            float forwardSpeed = Vector3.Dot(_rigidbody.linearVelocity, _transform.forward);
-
-            if (Mathf.Abs(forwardSpeed) < 0.1f)
+            if (_inputData.Move.y != 0)
                 return;
-            float brakingStregth = forwardSpeed * _movementSettings.ForwardDamping;
-            Vector3 brakingForce = -_transform.forward * brakingStregth;
-            _rigidbody.AddForce(brakingForce, ForceMode.Acceleration);
+
+            Vector3 velocity = _rigidbody.linearVelocity;
+            Vector3 horizontalVelocity = new Vector3(velocity.x, 0f, velocity.z);
+
+            if (horizontalVelocity.sqrMagnitude < 0.01f)
+            {
+                horizontalVelocity = Vector3.zero;
+            }
+            else
+            {
+                horizontalVelocity = Vector3.MoveTowards(horizontalVelocity, Vector3.zero,
+                    _movementSettings.ForwardDamping * Time.fixedDeltaTime);
+            }
+
+            _rigidbody.linearVelocity = new Vector3(horizontalVelocity.x, velocity.y, horizontalVelocity.z);
         }
 
         private void UpdateLift()
@@ -90,9 +101,8 @@ namespace HelicopterTag.Helicopter
 
             _currentTurnSpeed = Mathf.MoveTowards(_currentTurnSpeed, targetTurnSpeed, maxTurnChange);
 
-            //Vector3 angularVelocity = new Vector3(0, _currentTurnSpeed, 0);
-            //_rigidbody.angularVelocity = angularVelocity;
-            _rigidbody.angularVelocity = _transform.up * (Mathf.Deg2Rad * _currentTurnSpeed);
+            float turnSpeedRadians = _currentTurnSpeed * Mathf.Deg2Rad;
+            _rigidbody.angularVelocity = _transform.up * turnSpeedRadians;
         }
 
 
@@ -101,14 +111,26 @@ namespace HelicopterTag.Helicopter
             if (_inputData.Lift != 0)
                 return;
 
-            float currentHeight = _transform.position.y;
-            float heightDifference = _targetHoverHeight - currentHeight;
+            Vector3 velocity = _rigidbody.linearVelocity;
 
-            float hoverForce = heightDifference * _movementSettings.HoverStrength;
+            // Slowly stop vertical movement.
+            float newVerticalVelocity = Mathf.Lerp(
+                velocity.y,
+                0f,
+                _movementSettings.HoverDamping *
+                Time.fixedDeltaTime);
 
-            Vector3 hoverForceVector = Vector3.up * hoverForce;
+            // Tiny natural hover movement.
+            float hoverMotion =
+                Mathf.Sin(Time.time * _movementSettings.HoverSpeed)
+                * _movementSettings.HoverAmount;
 
-            _rigidbody.AddForce(hoverForceVector, ForceMode.Acceleration);
+            newVerticalVelocity += hoverMotion;
+
+            _rigidbody.linearVelocity = new Vector3(
+                velocity.x,
+                newVerticalVelocity,
+                velocity.z);
         }
 
         private void LimitLiftSpeed()
@@ -176,6 +198,49 @@ namespace HelicopterTag.Helicopter
             Vector3 clampedVerticalVelocity = Vector3.zero;
 
             _rigidbody.linearVelocity = remainingVelocity + clampedVerticalVelocity;
+        }
+        
+        private void AlignForwardVelocity()
+        {
+            Vector3 velocity = _rigidbody.linearVelocity;
+
+            Vector3 horizontalVelocity =
+                new Vector3(
+                    velocity.x,
+                    0f,
+                    velocity.z);
+
+            if (horizontalVelocity.sqrMagnitude < 0.01f)
+                return;
+
+            float speed = horizontalVelocity.magnitude;
+
+            Vector3 targetVelocity =
+                _transform.forward * speed;
+
+            Vector3 newVelocity =
+                Vector3.Lerp(
+                    horizontalVelocity,
+                    targetVelocity,
+                    _movementSettings.TurnVelocityAlignment *
+                    Time.fixedDeltaTime);
+
+            _rigidbody.linearVelocity =
+                new Vector3(
+                    newVelocity.x,
+                    velocity.y,
+                    newVelocity.z);
+        }
+
+        public void SetNetworkInput(Vector2 move, float lift)
+        {
+            InputData input = new InputData()
+            {
+                Move = move,
+                Lift = lift
+            };
+
+            SetInput(input);
         }
     }
 }

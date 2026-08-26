@@ -6,6 +6,5 @@ namespace HelicopterTag.Core.Input
     {
         public Vector2 Move;
         public float Lift;
-        public bool Fire;
     }
 }

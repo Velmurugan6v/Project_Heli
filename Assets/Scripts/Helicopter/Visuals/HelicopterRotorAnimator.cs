@@ -19,7 +19,6 @@ namespace HelicopterTag.Helicopter.Visuals
 
         private void RotateMainRotor()
         {
-            
             _mainRotor.Rotate(Vector3.up * (mainRotorSpeed * Time.deltaTime), Space.Self);
         }
 

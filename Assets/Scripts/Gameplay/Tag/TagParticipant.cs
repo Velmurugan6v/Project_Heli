@@ -1,4 +1,3 @@
-using System;
 using HelicopterTag.Core;
 using HelicopterTag.Gameplay.Player;
 using UnityEngine;
@@ -39,6 +38,12 @@ namespace HelicopterTag.Gameplay.Tag
             IsIt = false;
             _playerContext.MatchData.SetIt(false);
             GameLogger.Log($"Tag Participant {gameObject.name} is set to {IsIt}");
+        }
+
+        public void ApplyNetworkItState(bool value)
+        {
+            IsIt = value;
+            _playerContext.MatchData.SetIt(value);
         }
     }
 }

@@ -28,7 +28,6 @@ namespace HelicopterTag.Helicopter
         {
             _inputData.Move = _inputActions.Gameplay.Move.ReadValue<Vector2>();
             _inputData.Lift = _inputActions.Gameplay.Lift.ReadValue<float>();
-            _inputData.Fire = _inputActions.Gameplay.Fire.IsPressed();
 
 /*#if UNITY_EDITOR
             GameLogger.Log(

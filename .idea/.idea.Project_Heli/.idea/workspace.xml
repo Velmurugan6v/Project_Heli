@@ -5,23 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="01d7e6a9-de77-4acd-a71c-e7d49cb053e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/FusionLauncher.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/FusionLauncher.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/NetworkInputData.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/NetworkInputData.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/NetworkPlayer.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/NetworkPlayer.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/NetworkPlayerSpawner.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/NetworkPlayerSpawner.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Camera/HelicopterCamera.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Camera/HelicopterCamera.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/FusionAuthority.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/FusionAuthority.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/Match.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/Match/NetworkMatchState.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/Match/NetworkMatchState.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/Player.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/Player/NetworkPlayerState.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/Player/NetworkPlayerState.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/Tagging.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/Tagging/NetworkTagState.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/Tagging/NetworkTagState.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Project_Heli/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Project_Heli/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Data/Helicopter/DefaultMovementSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Helicopter/DefaultMovementSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Photon/Fusion/Resources/NetworkProjectConfig.fusion" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Photon/Fusion/Resources/NetworkProjectConfig.fusion" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Helicopter/Helcopter_1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Helicopter/Helcopter_1.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Gameplay/TagFeedView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Gameplay/TagFeedView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/PC_RPAsset.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/PC_RPAsset.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/UniversalRenderPipelineGlobalSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Anton SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Anton SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Core/Input/InputData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Core/Input/InputData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Tag/TagManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Tag/TagManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Tag/TagParticipant.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Tag/TagParticipant.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Helicopter/Config/HelicopterMovementSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Helicopter/Config/HelicopterMovementSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Helicopter/HelicopterInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Helicopter/HelicopterInput.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Helicopter/HelicopterMotor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Helicopter/HelicopterMotor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Helicopter/Visuals/HelicopterRotorAnimator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Helicopter/Visuals/HelicopterRotorAnimator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/FusionLauncher.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/FusionLauncher.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/NetworkInputData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/NetworkInputData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/NetworkPlayer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Networking/Fusion/NetworkPlayer.cs.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +74,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/photon-networking-foundation&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/photin-online-multiplayer&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -73,7 +85,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Standalone Player" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="$PROJECT_DIR$/../../../Games/Game Studio/Buillds\HelicopterTag.exe" />
+      <option name="EXE_PATH" value="$PROJECT_DIR$/../../../Games/Game Studio/Buillds/Development build\HelicopterTag.exe" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="V:\Games\Game Studio\Buillds" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -171,7 +183,13 @@
       <workItem from="1786679062712" duration="6476000" />
       <workItem from="1786687680597" duration="5561000" />
       <workItem from="1786721058059" duration="7805000" />
-      <workItem from="1786764833660" duration="5453000" />
+      <workItem from="1786764833660" duration="15788000" />
+      <workItem from="1787137155752" duration="8442000" />
+      <workItem from="1787149324931" duration="3731000" />
+      <workItem from="1787477491895" duration="629000" />
+      <workItem from="1787566527553" duration="11240000" />
+      <workItem from="1787728463515" duration="13391000" />
+      <workItem from="1787758940422" duration="4211000" />
     </task>
     <servers />
   </component>
@@ -198,24 +216,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Gameplay/Player/PlayerMatchData.cs</url>
-          <line>9</line>
-          <properties documentPath="V:\Unity Projects\Git Hub\Project_Heli\Assets\Scripts\Gameplay\Player\PlayerMatchData.cs" containingFunctionPresentation="Property 'TagScore'">
-            <startOffsets>
-              <option value="273" />
-            </startOffsets>
-            <endOffsets>
-              <option value="277" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
