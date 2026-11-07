@@ -8,7 +8,14 @@ namespace HelicopterTag.Gameplay.Input
     {
         [SerializeField] InputActionReference _startAction;
 
-        public bool StartPressed => _startAction.action.WasPressedThisFrame();
+        private bool _uiStartRequested;
+
+        public bool StartPressed => _uiStartRequested;
+
+        public void RequestStart()
+        {
+            _uiStartRequested = true;
+        }
 
         private void OnEnable()
         {

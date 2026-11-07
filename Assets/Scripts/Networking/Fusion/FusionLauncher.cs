@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using Fusion;
 using Fusion.Sockets;
 using HelicopterTag.Core;
+using HelicopterTag.Core.Events;
 using UnityEngine;
 
 namespace HelicopterTag.Networking.Fusion
 {
-    public class FusionLauncher : MonoBehaviour, INetworkRunnerCallbacks
+    public class FusionLauncher : MonoBehaviour, INetworkRunnerCallbacks, ITagInputRequest
     {
         [SerializeField] private GameMode _gameMode;
         private NetworkRunner _runner;
+        
+        private bool _tagRequested;
 
         private async void Start()
         {
@@ -19,9 +22,9 @@ namespace HelicopterTag.Networking.Fusion
             _runner = gameObject.AddComponent<NetworkRunner>();
 
             _runner.AddCallbacks(this);
+            LocalPlayerRegistry.RegisterTagInput(this);
 
-            var result = await _runner.StartGame(
-                new StartGameArgs
+            var result = await _runner.StartGame(new StartGameArgs
                 {
                     GameMode = _gameMode,
                     SessionName = "HelicopterTagRoom"
@@ -50,7 +53,24 @@ namespace HelicopterTag.Networking.Fusion
             else if (Input.GetKey(KeyCode.LeftControl))
                 data.Lift = -1;
 
+            data.Tag = _tagRequested;
+            _tagRequested = false;
+
             input.Set(data);
+        }
+        
+        public void RequestTag()
+        {
+            _tagRequested = true;
+        }
+
+        public NetworkPrefabRef netPrefab;
+        
+        
+        [ContextMenu("Spoen")]
+        public void SpownObject()
+        {
+            _runner.Spawn(netPrefab);
         }
 
         public void OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player)

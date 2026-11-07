@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 7880172236241341348}
   - component: {fileID: 8299842462254300308}
   - component: {fileID: 4740434521074004984}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Helcopter_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -592,6 +592,8 @@ MonoBehaviour:
   _playerState: {fileID: 4740434521074004984}
   _playerContext: {fileID: 8299842462254300308}
   _moveSpeed: 5
+  _tagDetector: {fileID: 622999912011354252}
+  _tagButtonUI: {fileID: 0}
 --- !u!114 &7798624650138004695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -853,7 +855,7 @@ GameObject:
   - component: {fileID: 6271109378785640630}
   - component: {fileID: 173282012028241470}
   - component: {fileID: 622999912011354252}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tag Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -910,6 +912,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _participant: {fileID: 7068930343054496110}
   _tagManager: {fileID: 0}
+  _tagRange: 2
+  _playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &7140384567446073302
 GameObject:
   m_ObjectHideFlags: 0

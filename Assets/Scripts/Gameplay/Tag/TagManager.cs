@@ -77,22 +77,46 @@ namespace HelicopterTag.Gameplay.Tag
             UpdateTagProtection();
         }
 
-        private void SelectInitialIt()
+        [ContextMenu("SEt")]
+        public void SelectInitialIt()
         {
+            if (_participants.Count == 0)
+            {
+                Debug.LogError("[TagManager] No players registered!");
+                return;
+            }
+            
             int participantCount = _participants.Count;
             int randomIndex = Random.Range(0, participantCount);
             _currentIt = _participants[randomIndex];
             _currentIt.SetAsIt();
             
             EventBus.Publish(new ItChangedEvent(null, _currentIt));
+            Debug.Log($"[TagManager] Random IT: {_currentIt.name}");
         }
 
-        private void RegisterParticipant(TagParticipant participant)
+        public void RegisterParticipant(TagParticipant participant)
         {
+            if (participant == null)
+                return;
+
+            if (_participants.Contains(participant))
+                return;
+
+            _participants.Add(participant);
+
+            Debug.Log($"[TagManager] Registered: {participant.name}");
         }
 
-        private void UnregisterParticipant(TagParticipant participant)
+        public void UnregisterParticipant(TagParticipant participant)
         {
+            if (participant == null)
+                return;
+
+            if (!_participants.Remove(participant))
+                return;
+
+            GameLogger.Log($"[TagManager] Unregistered: {participant.name}");
         }
 
         public void TransferIt(TagParticipant newIt)

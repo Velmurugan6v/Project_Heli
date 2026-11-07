@@ -7,5 +7,7 @@ namespace HelicopterTag.Networking.Fusion
     {
         public Vector2 Move;
         public float Lift;
+
+        public NetworkBool Tag;
     }
 }

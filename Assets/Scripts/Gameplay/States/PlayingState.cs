@@ -8,23 +8,23 @@ namespace HelicopterTag.Gameplay.States
 {
     public class PlayingState : IGameState
     {
-        private readonly GameplayConfig _config;
-        private float _timeRemaining;
-        private int _lastDisplayedSecond;
+        readonly GameplayConfig m_config;
+        float m_timeRemaining;
+        int m_lastDisplayedSecond;
         public bool IsCompleted { get; private set; }
 
 
-        public PlayingState(GameplayConfig config)
+        public PlayingState(GameplayConfig mConfig)
         {
-            _config = config;
+            m_config = mConfig;
         }
 
         public void Enter()
         {
             GameLogger.Log("Enter Playing State");
             IsCompleted = false;
-            _timeRemaining = _config.MatchDuration;
-            _lastDisplayedSecond = Mathf.CeilToInt(_timeRemaining);
+            m_timeRemaining = m_config.MatchDuration;
+            m_lastDisplayedSecond = Mathf.CeilToInt(m_timeRemaining);
             EventBus.Publish(new MatchStartedEvent());
         }
 
@@ -38,19 +38,19 @@ namespace HelicopterTag.Gameplay.States
             if (IsCompleted)
                 return;
 
-            _timeRemaining -= Time.deltaTime;
+            m_timeRemaining -= Time.deltaTime;
 
-            int displayTime = Mathf.CeilToInt(_timeRemaining);
+            int displayTime = Mathf.CeilToInt(m_timeRemaining);
 
-            if (displayTime != _lastDisplayedSecond)
+            if (displayTime != m_lastDisplayedSecond)
             {
-                _lastDisplayedSecond = displayTime;
+                m_lastDisplayedSecond = displayTime;
                 EventBus.Publish(new MatchTimeChangedEvent(displayTime));
             }
 
-            if (_timeRemaining <= 0f)
+            if (m_timeRemaining <= 0f)
             {
-                _timeRemaining = 0;
+                m_timeRemaining = 0;
                 IsCompleted = true;
             }
         }

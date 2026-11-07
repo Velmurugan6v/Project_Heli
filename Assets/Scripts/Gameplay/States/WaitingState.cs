@@ -6,8 +6,7 @@ namespace HelicopterTag.Gameplay.States
     public class WaitingState : IGameState
     {
         private readonly IMatchInput _matchInput;
-
-
+        
         public bool IsCompleted { get; private set; }
 
         public WaitingState(IMatchInput matchInput)
